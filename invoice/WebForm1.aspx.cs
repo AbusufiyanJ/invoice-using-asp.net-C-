@@ -12,7 +12,7 @@ namespace invoice
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        int i = 0;
+        SqlConnection con = new SqlConnection(@"Data Source=ABU-PC;Initial Catalog=invoice;Integrated Security=True");
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,7 +23,12 @@ namespace invoice
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "insert into invoice_data values('" + ChargesDropDown.Text + "','" + DescriptionText.Text + "','" + TaxText.Text + "','" + AmountText.Text + "')";
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
