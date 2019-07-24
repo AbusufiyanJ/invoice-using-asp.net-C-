@@ -245,7 +245,7 @@
                     <asp:Label ID="Label3" runat="server" Text="Party Name"></asp:Label>
                     </strong></td>
                 <td class="auto-style91">
-                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="auto-style54" DataSourceID="SqlDataSource2" DataTextField="party_name" DataValueField="party_name">
+                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="auto-style54" DataSourceID="SqlDataSource1" DataTextField="party_name" DataValueField="party_name" AutoPostBack="True">
                     </asp:DropDownList>
                 </td>
                 <td class="auto-style107">
@@ -254,7 +254,7 @@
                     </strong>
                 </td>
                 <td class="auto-style99">
-                    <asp:TextBox ID="TextBox1" runat="server" CssClass="auto-style54" TextMode="MultiLine" Visible="False" Width="136px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox1" runat="server" CssClass="auto-style54" TextMode="MultiLine" Width="145px" ReadOnly="True" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
                 </td>
                 <td class="auto-style119">
                     &nbsp; <strong>
@@ -262,14 +262,16 @@
                     </strong>
                 </td>
                 <td class="auto-style77">
-                    <asp:DropDownList ID="DropDownList3" runat="server">
-                    </asp:DropDownList>
+                    <asp:TextBox ID="DescriptionText0" runat="server"></asp:TextBox>
                 </td>
                 <td class="auto-style78"><strong>
                     <asp:Label ID="Label6" runat="server" Text="Currency"></asp:Label>
                     </strong></td>
                 <td class="auto-style38">
                     <asp:DropDownList ID="DropDownList4" runat="server" CssClass="auto-style54">
+                        <asp:ListItem>INR</asp:ListItem>
+                        <asp:ListItem>USD</asp:ListItem>
+                        <asp:ListItem>EUR</asp:ListItem>
                     </asp:DropDownList>
                 </td>
                 <td class="auto-style38"></td>
@@ -291,7 +293,7 @@
                     <asp:Label ID="Label7" runat="server" Text="Charges"></asp:Label>
                     </strong></td>
                 <td class="auto-style116">
-                    <asp:DropDownList ID="ChargesDropDown" runat="server" CssClass="auto-style54">
+                    <asp:DropDownList ID="ChargesDropDown" runat="server" CssClass="auto-style54" AutoPostBack="True">
                         <asp:ListItem>Charge 1</asp:ListItem>
                         <asp:ListItem>Charge 2</asp:ListItem>
                         <asp:ListItem>Charge 3</asp:ListItem>
@@ -317,10 +319,10 @@
                 <td class="auto-style95"></td>
                 <td class="auto-style111"></td>
                 <td class="auto-style103"><strong>
-                    <asp:Label ID="Label9" runat="server" Text="Tax"></asp:Label>
+                    <asp:Label ID="Label10" runat="server" Text="Charge amount"></asp:Label>
                     </strong></td>
                 <td class="auto-style118">
-                    <asp:TextBox ID="TaxText" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="AmountText" runat="server" AutoPostBack="True" OnTextChanged="AmountText_TextChanged"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -328,10 +330,21 @@
                 <td class="auto-style95">&nbsp;</td>
                 <td class="auto-style111">&nbsp;</td>
                 <td class="auto-style103"><strong>
-                    <asp:Label ID="Label10" runat="server" Text="Charge amount"></asp:Label>
+                    <asp:Label ID="Label9" runat="server" Text="Tax"></asp:Label>
                     </strong></td>
                 <td class="auto-style118">
-                    <asp:TextBox ID="AmountText" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="TaxText" runat="server" AutoPostBack="True" OnTextChanged="TaxText_TextChanged" ReadOnly="True">18</asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style39">&nbsp;</td>
+                <td class="auto-style95">&nbsp;</td>
+                <td class="auto-style111">&nbsp;</td>
+                <td class="auto-style103"><strong>
+                    <asp:Label ID="Label11" runat="server" Text="Total"></asp:Label>
+                    </strong></td>
+                <td class="auto-style118">
+                    <asp:TextBox ID="TotalText" runat="server" AutoPostBack="True" OnTextChanged="TotalText_TextChanged"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -343,26 +356,30 @@
                     <asp:Button ID="Button4" runat="server" Height="33px" Text="ADD" Width="91px" OnClick="Button3_Click" />
                 </td>
             </tr>
-            <tr>
-                <td class="auto-style39">&nbsp;</td>
-                <td class="auto-style95">&nbsp;</td>
-                <td class="auto-style111">&nbsp;</td>
-                <td class="auto-style103">&nbsp;</td>
-                <td class="auto-style118">&nbsp;</td>
-            </tr>
+            <asp:Label ID="lblmsg" runat="server" BackColor="Red" Visible="false"></asp:Label>
         </table>
     <table class="auto-style44">
         <tr>
             <td class="auto-style46">&nbsp;</td>
             <td class="auto-style63">
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="LightGoldenrodYellow" BorderColor="Tan" BorderWidth="1px" CellPadding="2" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="None" Width="551px">
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="LightGoldenrodYellow" BorderColor="Tan" BorderWidth="1px" CellPadding="2" DataSourceID="SqlDataSource2" ForeColor="Black" GridLines="None" Width="551px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                     <AlternatingRowStyle BackColor="PaleGoldenrod" />
                     <Columns>
+                        
                         <asp:BoundField DataField="s_no" HeaderText="s_no" SortExpression="s_no" />
-                        <asp:BoundField DataField="charges" HeaderText="charges" SortExpression="charges" />
-                        <asp:BoundField DataField="description" HeaderText="description" SortExpression="description" />
+                        <asp:BoundField DataField="Charge" HeaderText="Charge" SortExpression="Charge" />
+                        <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
                         <asp:BoundField DataField="tax" HeaderText="tax" SortExpression="tax" />
                         <asp:BoundField DataField="charge_amt" HeaderText="charge_amt" SortExpression="charge_amt" />
+
+                              <asp:TemplateField>  
+                                <EditItemTemplate>  
+                                    <asp:CheckBox ID="CheckBox1" runat="server" />  
+                                </EditItemTemplate>  
+                                <ItemTemplate>  
+                                    <asp:CheckBox ID="CheckBox2" runat="server" />  
+                                </ItemTemplate>  
+                            </asp:TemplateField>  
                     </Columns>
                     <FooterStyle BackColor="Tan" />
                     <HeaderStyle BackColor="Tan" Font-Bold="True" />
@@ -373,10 +390,11 @@
                     <SortedDescendingCellStyle BackColor="#E1DB9C" />
                     <SortedDescendingHeaderStyle BackColor="#C2A47B" />
                 </asp:GridView>
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:invoiceConnectionString %>" SelectCommand="SELECT [s_no], [charges], [description], [tax], [charge_amt] FROM [invoice_data]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:dataConnectionString %>" SelectCommand="SELECT [party_name], [party_address] FROM [party]"></asp:SqlDataSource>
             </td>
             <td class="auto-style47">
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:invoiceConnectionString %>" SelectCommand="SELECT [invoice_no], [party_name], [party_address], [job_no], [currency] FROM [custumer_details]"></asp:SqlDataSource>
+                <asp:Button ID="delete_btn" runat="server" OnClick="delete_btn_Click" Text="Delete Data" />
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:dataConnectionString %>" SelectCommand="SELECT [s_no], [Charge], [Description], [charge_amt], [tax] FROM [invoice_data]"></asp:SqlDataSource>
             </td>
         </tr>
         <tr>
