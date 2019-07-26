@@ -85,13 +85,13 @@ namespace invoice {
         protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
-        /// TextBox1 control.
+        /// AddressText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox AddressText;
         
         /// <summary>
         /// Label5 control.
@@ -103,13 +103,13 @@ namespace invoice {
         protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
-        /// DescriptionText0 control.
+        /// JobText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DescriptionText0;
+        protected global::System.Web.UI.WebControls.TextBox JobText;
         
         /// <summary>
         /// Label6 control.
@@ -238,13 +238,13 @@ namespace invoice {
         protected global::System.Web.UI.WebControls.Label lblmsg;
         
         /// <summary>
-        /// GridView1 control.
+        /// gvDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView gvDetails;
         
         /// <summary>
         /// SqlDataSource1 control.
