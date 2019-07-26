@@ -22,10 +22,11 @@ namespace invoice
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!IsPostBack)
             {
-                
-                DropDownList1.Items.Clear();
+                insert_msg.Text = " <-- Add data Here";
+                NameText.Items.Clear();
                 con.Open();
                 cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
@@ -37,17 +38,20 @@ namespace invoice
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    DropDownList1.Items.Add(dr["Party_name"].ToString());
+                    NameText.Items.Add(dr["Party_name"].ToString());
                 }
                 con.Close();
                 BindUserDetails();
             }
+
             
+            
+
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmd = new SqlCommand("SELECT * FROM party where party_name = '"+DropDownList1.Text+"'", con);
+            cmd = new SqlCommand("SELECT * FROM party where party_name = '"+NameText.Text+"'", con);
             con.Open();
             //cmd.ExecuteNonQuery();
 
@@ -72,10 +76,7 @@ namespace invoice
 
 
       
-        protected void Button1_Click(object sender, EventArgs e)
-        {
 
-        }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
@@ -153,14 +154,59 @@ namespace invoice
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "insert into invoice_data (Charge,Description,charge_amt,tax,total) values ('" + ChargesDropDown.Text + "', '" + DescriptionText.Text + "', '" + AmountText.Text + "' ,'" + TaxText.Text + "', '" + TotalText.Text + "')";
                 cmd.ExecuteNonQuery();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    insert_msg.Text = "Added Sucessfully";
+                }
+
+                if (cmd.ExecuteNonQuery() < 0)
+                {
+                    insert_msg.Text = "<-- Insert Data here";
+                }
+
+
                 con.Close();
                 gvDetails.DataBind();
                
             }
             BindUserDetails();
+            DescriptionText.Text = "";
+            AmountText.Text = "";
+            TaxText.Text = "";
+            TotalText.Text = "";
+
+            
         }
 
-        protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
+        
+protected void Button1_Click(object sender, EventArgs e)
+        {
+            {
+                con.Open();
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "insert into party_data (party_name,party_address,job_no,currency) values ('" + NameText.Text + "', '" + AddressText.Text + "', '" + JobText.Text + "' ,'" + CurrencyText.Text + "')";
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+
+            }
+
+            
+            AddressText.Text = "";
+            JobText.Text = "";
+         
+
+
+            //ID += 1;
+            //var no = Convert.ToInt32(ID);
+            //txtinvoiceno.Text = no.ToString().PadLeft(5, '0');
+
+
+        }
+
+
+    protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
