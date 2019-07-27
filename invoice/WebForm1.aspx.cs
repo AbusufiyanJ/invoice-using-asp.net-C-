@@ -154,15 +154,15 @@ namespace invoice
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "insert into invoice_data (Charge,Description,charge_amt,tax,total) values ('" + ChargesDropDown.Text + "', '" + DescriptionText.Text + "', '" + AmountText.Text + "' ,'" + TaxText.Text + "', '" + TotalText.Text + "')";
                 cmd.ExecuteNonQuery();
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    insert_msg.Text = "Added Sucessfully";
-                }
+                ////if (cmd.ExecuteNonQuery() > 0)
+                ////{
+                ////    insert_msg.Text = "Added Sucessfully";
+                ////}
 
-                if (cmd.ExecuteNonQuery() < 0)
-                {
-                    insert_msg.Text = "<-- Insert Data here";
-                }
+                ////if (cmd.ExecuteNonQuery() < 0)
+                ////{
+                ////    insert_msg.Text = "<-- Insert Data here";
+                ////}
 
 
                 con.Close();

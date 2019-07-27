@@ -323,7 +323,7 @@
                 <td class="auto-style142"></td>
                 <td class="auto-style103">&nbsp;</td>
                 <td class="auto-style118">
-                    <asp:Button ID="Button4" runat="server" Height="33px" Text="ADD" Width="91px" OnClick="Button3_Click" />
+                    <asp:Button ID="Addbtn" runat="server" Height="33px" Text="ADD" Width="91px" OnClick="Button3_Click" />
                 </td>
                 <td colspan="2">
                     <asp:Label ID="insert_msg" runat="server" Text="&lt;-- Add data here"></asp:Label>
